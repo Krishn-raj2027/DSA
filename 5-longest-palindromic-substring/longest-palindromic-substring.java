@@ -1,31 +1,26 @@
 class Solution {
     public String longestPalindrome(String s) {
-        return substring(s);
+        if (s == null || s.length() < 1) return "";
+        int start = 0, end = 0;
+        
+        for (int i = 0; i < s.length(); i++) {
+            int len1 = expandFromCenter(s, i, i);     
+            int len2 = expandFromCenter(s, i, i + 1); 
+            int len = Math.max(len1, len2);
+            
+            if (len > end - start) {
+                start = i - (len - 1) / 2;
+                end = i + len / 2;
+            }
+        }
+        return s.substring(start, end + 1);
     }
-    public static String substring(String st) {
-		String longest = "";
-		for(int i = 0; i<st.length(); i++) {
-			for(int j = i+1; j<= st.length(); j++) {
-				String sub = st.substring(i, j);
-				if(palindrome(sub) && sub.length()> longest.length()) {
-					longest = sub; //update longest
-					
-				}
-			}
-		}
-		return longest;
-	}
-	public static boolean palindrome(String str) {
-		int i = 0;
-		int j = str.length() - 1;
-		while(i < j) {
-			if(str.charAt(i) != str.charAt(j)) {
-				return false;
-			}
-			i++;
-			j--;
-		}
-		return true;
-	}
-
+    
+    private int expandFromCenter(String s, int left, int right) {
+        while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+            left--;
+            right++;
+        }
+        return right - left - 1; 
+    }
 }
