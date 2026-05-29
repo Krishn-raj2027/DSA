@@ -10,12 +10,12 @@ class Solution {
 			int open,
 			int close,
 			int n) {
-	
+		//Base case
 		if(curr.length()==2*n) {
 			ans.add(curr);
 			return;
 		}
-		
+		//Add '('
 		if(open<n) {
 			backtrack(ans,
 				curr+"(",
@@ -23,7 +23,7 @@ class Solution {
 				close,
 				n);
 		}
-		
+		//close ')'
 		if(open>close) {
 			backtrack(ans,
 					curr+")",
