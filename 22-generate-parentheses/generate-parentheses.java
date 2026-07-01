@@ -1,35 +1,23 @@
 class Solution {
     public List<String> generateParenthesis(int n) {
-		List<String>ans = new ArrayList<>();
-		backtrack(ans,"",0,0,n);
-		return ans;
+		List<String>M = new ArrayList<>();
+		parentheses(n,0,0,"",M);
+		return M;
 
 	}
-	private void backtrack(List<String> ans,
-			String curr,
-			int open,
-			int close,
-			int n) {
-		//Base case
-		if(curr.length()==2*n) {
-			ans.add(curr);
-			return;
-		}
-		//Add '('
-		if(open<n) {
-			backtrack(ans,
-				curr+"(",
-				open+1,
-				close,
-				n);
-		}
-		//close ')'
-		if(open>close) {
-			backtrack(ans,
-					curr+")",
-					open,
-					close+1,
-					n);
-		}
+	public static void parentheses(int n, int open, int close, String ans,List<String> M) {
+	if(open == n && close == n) {
+		//System.out.println(ans+" ");
+		M.add(ans);
+		return;
 	}
+	if(open<n) {
+		parentheses(n,open+1,close,ans+"(",M);
+	}
+	if(close<open) {
+		parentheses(n,open,close+1,ans+")",M);
+	}
+    }
+    
+	
 }
