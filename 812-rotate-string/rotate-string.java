@@ -1,13 +1,7 @@
 class Solution {
     public boolean rotateString(String s, String goal) {
         if (s.length() != goal.length()) return false;
-
-        String rotated = s;
-        for (int i = 0; i < s.length(); i++) {
-            // rotate: first char to last
-            rotated = rotated.substring(1) + rotated.charAt(0);
-            if (rotated.equals(goal)) return true;
-        }
-        return false;
+        String doubleS = s + s;
+        return doubleS.contains(goal);
     }
 }
